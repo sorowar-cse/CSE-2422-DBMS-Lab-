@@ -1,0 +1,101 @@
+--------------------------------
+--BOOK PRICE GREATER THAN 5000--
+--------------------------------
+
+
+BEGIN
+
+FOR i IN 
+ (
+    SELECT*
+    FROM BOOK
+ )
+ LOOP
+
+ IF I.B_PRICE> 1500 THEN 
+  DBMS_OUTPUT.PUT_LINE(I.B_ID || ' ' || I.B_NAME || ' ' || I.PUB || ' ' ||  I.B_PRICE);
+ END IF;
+
+ END LOOP;
+END;
+-----------------
+--2. REV POSTIVE-
+-----------------
+
+DECLARE
+
+WORD VARCHAR2(50) :=:INPUT;
+
+BEGIN
+
+ FOR i IN
+  (
+     SELECT R.R_ID,R.B_ID,B.B_NAME,REVIEW,COOMENT
+     FROM BOOK B,BOOK_REV R
+     WHERE R.B_ID = B.B_ID
+     
+  )
+LOOP
+ IF I.REVIEW = WORD THEN 
+  DBMS_OUTPUT.PUT_LINE(I.R_ID || '  ' || I.B_NAME || '  ' || I.REVIEW || '  ' || I.COOMENT);
+ END IF;
+END LOOP;
+END;
+
+-------
+NO..3 -
+-------
+DECLARE
+ID VARCHAR2(50) :=:INPUT1;
+PASS VARCHAR2(50) :=:INPUT2;
+
+BEGIN
+
+FOR I IN
+  (
+     SELECT* 
+     FROM CUSTOMER 
+  )
+ LOOP
+ IF I.C_ID = ID AND I.PASS = PASS THEN
+ DBMS_OUTPUT.PUT_LINE(I.C_ID || '  ' || I.C_NAME || '  ' || I.MOBILE);
+ EXIT;
+ END IF;
+ END LOOP;
+
+END;
+
+-----
+NO.4-
+-----
+DECLARE 
+
+BEGIN
+FOR i IN
+  (
+     SELECT*
+     FROM CT
+     WHERE REVIEW = (
+                      SELECT REVIEW
+                      FROM CT
+                      WHERE C_NAME = 'SALMAN'
+                    )
+                  
+  )
+
+LOOP
+  DBMS_OUTPUT.PUT_LINE(I.C_ID || ' ' || I.C_NAME || ' ' || I.MOBILE || ' ' ||  I.ADDS || ' ' || I.PASS);
+END LOOP;
+END;
+
+
+VIEW NAME ->> CT 
+----------------
+
+CODES
+------
+SELECT R.R_ID,R.C_ID,C.C_NAME,MOBILE,ADDS,PASS,R.REVIEW
+FROM BOOK_REV R,CUSTOMER C
+WHERE R.C_ID = C.C_ID;
+
+     
